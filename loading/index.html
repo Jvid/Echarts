@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .chart{
+            width: 500px;
+            height:400px;
+            border:1px solid brown;
+            margin: 30px auto;
+        }
+    </style>
+    <script type="text/javascript" src="../libs/echarts.min.js"></script>
+</head>
+<body>
+<div class="chart" id="main"></div>
+
+<!--
+    echarts提供了相应的预加载的loading效果，在加载数据之前设置myChart.showLoading();显示loading图标
+    当数据加载出来之后调 myChart.hideLoading();将加载图标去调
+
+
+    echarts的动态数据加载的实现是根据定时获取数据然后重新制表，动画效果是自带的
+
+
+-->
+
+
+
+
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        //设置整个的背景颜色
+        backgroundColor: '#2c343c',
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                data:[
+                    {value:235, name:'视频广告'},
+                    {value:274, name:'联盟广告'},
+                    {value:310, name:'邮件营销'},
+                    {value:335, name:'直接访问'},
+                    {value:400, name:'搜索引擎'}
+                ],
+                //设置卫南丁格尔图
+                roseType: 'angle',
+                label: {
+                    normal: {
+                        textStyle: {
+                            //设置文字的颜色
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        lineStyle: {
+                            //设置旁边文字线的颜色
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        //设置扇形的颜色
+                        color:'brown',
+                        //动画运行时候扫过的阴影
+                        shadowBlur: 200,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>
