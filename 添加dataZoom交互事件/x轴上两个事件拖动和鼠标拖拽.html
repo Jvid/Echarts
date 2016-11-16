@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>区域缩放组件</title>
+    <style type="text/css">
+        .chart{
+            width: 500px;
+            height:400px;
+            border:1px solid brown;
+            margin: 30px auto;
+        }
+    </style>
+    <script type="text/javascript" src="../libs/echarts.min.js"></script>
+</head>
+<body>
+<div class="chart" id="main"></div>
+<!--
+
+    dataZoom 组件可同时存在多个，起到共同控制的作用。控制同一个数轴的组件，会自动联动。
+
+-->
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'value'
+        },
+        dataZoom: [
+            {   // 这个dataZoom组件，默认控制x轴。
+                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                start: 10,      // 左边在 10% 的位置。
+                end: 60         // 右边在 60% 的位置。
+            },
+            {   // 这个dataZoom组件，也控制x轴。
+                type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
+                start: 10,      // 左边在 10% 的位置。
+                end: 60         // 右边在 60% 的位置。
+            }
+        ],
+        series: [
+            {
+                type: 'scatter', // 这是个『散点图』
+                itemStyle: {
+                    normal: {
+                        color:'red',//这个是添加圆点的颜色
+                        opacity: 0.8
+                    }
+                },
+                symbolSize: function (val) {
+                    return val[2] * 40;
+                },
+                data: [["14.616","7.241","0.896"],["3.958","5.701","0.955"],["2.768","8.971","0.669"],["9.051","9.710","0.171"],["14.046","4.182","0.536"],["12.295","1.429","0.962"],["4.417","8.167","0.113"],["0.492","4.771","0.785"],["7.632","2.605","0.645"],["14.242","5.042","0.368"]]
+            }
+        ]
+    }
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>
